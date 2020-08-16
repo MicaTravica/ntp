@@ -4,6 +4,7 @@ import (
 	"math"
 	"time"
 
+	"github.com/MicaTravica/ntp/golang/savematrix"
 	"github.com/MicaTravica/ntp/golang/util"
 )
 
@@ -12,10 +13,11 @@ type resultP struct {
 	Matrix [][]float64
 }
 
-func pMatrix(n int, mtx [][][]float64, chanals map[string]chan []float64, num int, main chan resultP) {
+func pMatrix(n int, mtx [][][]float64, chanals map[string]chan []float64, num int, main chan resultP, saveMatrix savematrix.SaveMatrix) {
 	pSize := len(mtx[0][0])
 	for t := 0; t < n; t++ {
 		util.AddAndMultiply(mtx[2], mtx[0], mtx[1], pSize)
+		saveMatrix.AddToCParallel(mtx[2], num, t)
 		if t == n-1 {
 			main <- resultP{num, mtx[2]}
 			break
@@ -40,6 +42,9 @@ func pMatrix(n int, mtx [][][]float64, chanals map[string]chan []float64, num in
 // Parallel matrix multiplication
 func Parallel(n, p int) {
 	matrix1, matrix2 := util.CreateMatrix2(n)
+
+	saveMatrix := savematrix.SaveMatrix{}
+	saveMatrix.CrateSaveMatrix(matrix1, matrix2, p)
 
 	start := time.Now()
 
@@ -89,7 +94,7 @@ func Parallel(n, p int) {
 			chs["dest2"] = chanals[(i-1+pSqrt)%pSqrt][j][1]
 			chs["source1"] = chanals[i][j][0]
 			chs["source2"] = chanals[i][j][1]
-			go pMatrix(n, mtx, chs, i*pSqrt+j, main)
+			go pMatrix(n, mtx, chs, i*pSqrt+j, main, saveMatrix)
 		}
 	}
 	for t := 0; t < p; t++ {
@@ -103,4 +108,5 @@ func Parallel(n, p int) {
 	elapsed := time.Since(start)
 
 	util.PrintResult(result, elapsed)
+	saveMatrix.WriteToFile()
 }
