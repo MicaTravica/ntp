@@ -1,7 +1,7 @@
 import time
 from util import create_2matrix, add_and_multiply, print_result
 from save_matrix import SaveMatrix
-import json
+
 
 def multiply(mtx1, mtx2, m_size):
     mtx3 = [[0] * m_size for _ in range(m_size)]

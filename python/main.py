@@ -7,9 +7,9 @@ if __name__ == '__main__':
     print("Cannon’s algorithm for matrix multiplication")
     while True:
         size = insert_number("Insert the matrix dimensions(nxn), just one number(n): ")
-        if size > 0:
+        if size > 1:
             break
-        print("Dimension must be positive integer!")
+        print("Dimension must be greater then 1!")
 
     print("Choose option:\n"
           "1. Sequential\n"
@@ -22,7 +22,9 @@ if __name__ == '__main__':
         elif t == 2:
             while True:
                 p = insert_number("Insert the p: ")
-                if math.sqrt(p) % 1 != 0:
+                if p <= 1:
+                    print("P must be greater then 1!")
+                elif math.sqrt(p) % 1 != 0:
                     print("P must be perfect square!")
                 elif size / math.sqrt(p) % 1 != 0:
                     print("Sqrt(p) can't divide n (size of matrix)!")

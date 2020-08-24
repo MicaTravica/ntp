@@ -21,8 +21,8 @@ def create_matrix(m_size, name):
                                "1. Manually\n"
                                "2. Random\n"
                                "3. From 1 to n*n\n"
-                               "4. All ones\n"
-                               "5. One on diagonal\n")
+                               "4. All 1\n"
+                               "5. 1 on diagonal\n")
     while True:
         t = insert_number("Insert the option: ")
         if t == 1:
