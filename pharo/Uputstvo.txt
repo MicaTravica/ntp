@@ -1,0 +1,4 @@
+U playground-u unesite:
+
+m := MatrixVisualisation new.
+(m simulate: 'putanju do fajla') @ RSCanvasController.
