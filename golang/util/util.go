@@ -88,8 +88,8 @@ func createMatrix(n int, name string) [][]float64 {
 		"1. Manually\n" +
 		"2. Random\n" +
 		"3. From 1 to n*n\n" +
-		"4. All ones\n" +
-		"5. One on diagonal\n")
+		"4. All 1\n" +
+		"5. 1 on diagonal\n")
 	var matrix [][]float64 = nil
 	for {
 		t := InsertNumber("Insert the option: ")

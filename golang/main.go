@@ -14,10 +14,10 @@ func main() {
 	n := 0
 	for {
 		n = util.InsertNumber("Insert the matrix dimensions(nxn), just one number(n): ")
-		if n > 0 {
+		if n > 1 {
 			break
 		}
-		fmt.Println("Dimension must be positive integer!")
+		fmt.Println("Dimension must be greater then 1!")
 	}
 
 	fmt.Println("Choose option:\n" +
@@ -34,7 +34,9 @@ func main() {
 				p = util.InsertNumber("Insert the p: ")
 				intRoot := int(math.Sqrt(float64(p)))
 				divCh := float64(n) / math.Sqrt(float64(p))
-				if intRoot*intRoot != p {
+				if p <= 1 {
+					fmt.Println("P must be greather then 1!")
+				} else if intRoot*intRoot != p {
 					fmt.Println("P must be perfect square!")
 				} else if math.Trunc(divCh) != divCh {
 					fmt.Println("Sqrt(p) can't divide n (size of matrix)!")

@@ -1,7 +1,6 @@
 package savematrix
 
 import (
-	"fmt"
 	"log"
 	"math"
 	"os"
@@ -107,8 +106,6 @@ func (saveMatrix *SaveMatrix) WriteToFile() {
 	if err2 != nil {
 		log.Fatal(err2)
 	}
-
-	fmt.Println("done")
 }
 
 // AddToCSequential - adding result by iterations
