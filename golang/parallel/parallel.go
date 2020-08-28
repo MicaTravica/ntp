@@ -65,7 +65,7 @@ func Parallel(n, p int) {
 		for j := range chanals[i] {
 			chanals[i][j] = make([]chan []float64, 2)
 			for k := range chanals[i][j] {
-				chanals[i][j][k] = make(chan []float64, pSqrt)
+				chanals[i][j][k] = make(chan []float64, 1)
 			}
 		}
 	}
